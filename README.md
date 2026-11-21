@@ -6,17 +6,22 @@ A personal repack of Carl Burch’s Logisim 2.7.1 for Apple Silicon Macs. It bun
 
 ## 下載與安裝 / Download and install
 
-[下載 Logisim 2.7.1 for Apple Silicon](https://github.com/OTOHARiRiSA/Logisim-2.7.1-macos-arm64/releases/download/2.7.1/Logisim-2.7.1-macos-arm64.zip)
+[下載 Logisim 2.7.1 / Release downloads](https://github.com/OTOHARiRiSA/Logisim-2.7.1-macos-arm64/releases/tag/2.7.1)
 
-解壓縮 ZIP，將 `Logisim.app` 拖到「應用程式」資料夾，再雙擊開啟。
+DMG 和 ZIP 內含相同的 `Logisim.app`，選擇其中一種即可。
 
-Unzip the archive, drag `Logisim.app` to Applications, and double-click it.
+Both downloads contain the same `Logisim.app`. Choose either format.
+
+| 格式 / Format | 安裝方式 / Installation |
+| --- | --- |
+| DMG | 開啟磁碟映像，將 `Logisim.app` 拖到「應用程式」。<br>Open the disk image and drag `Logisim.app` to Applications. |
+| ZIP | 解壓縮後，將 `Logisim.app` 移到「應用程式」。<br>Extract the archive and move `Logisim.app` to Applications. |
 
 ### 首次開啟 / First launch
 
-此版本使用 ad hoc 簽名，尚未通過 Apple 公證。若 Gatekeeper 攔截，先嘗試開啟一次，再到「系統設定 → 隱私權與安全性」為 Logisim 選擇「仍要打開」。
+此版本使用 ad hoc 簽名，尚未經 Apple 公證。若 Gatekeeper 攔截且你確認來源可信，先嘗試開啟一次，再到「系統設定 → 隱私權與安全性」為 Logisim 選擇「強制打開」。 [Apple 支援](https://support.apple.com/zh-tw/102445)
 
-This release is ad hoc signed and has not been notarized. If Gatekeeper blocks it, try opening it once, then choose **Open Anyway** for Logisim in **System Settings → Privacy & Security**. [Apple Support](https://support.apple.com/en-us/102445)
+This release is ad hoc signed and has not been notarized. If Gatekeeper blocks it and you trust the download, try opening it once, then choose **Open Anyway** for Logisim in **System Settings → Privacy & Security**. [Apple Support](https://support.apple.com/en-us/102445)
 
 ## 這是如何做的？ / How was this built?
 
@@ -45,5 +50,5 @@ The build produces `dist/Logisim.app` and `dist/Logisim-2.7.1-macos-arm64.zip`. 
 ## 授權 / License
 
 - **Logisim 2.7.1** 由 Carl Burch 開發，原始碼和授權條款收錄於 `vendor/logisim.jar`。 The original JAR includes the Logisim source and GPL terms. [Logisim](https://cburch.com/logisim/)
-- **Eclipse Temurin (OpenJDK)** 使用 GPL v2 with Classpath Exception。GitHub Release 2.7.1 內建 Temurin 11.0.33+10，對應原始碼為 `OpenJDK11U-jdk-sources_11.0.33_10.tar.gz`。 The Temurin source for the published ZIP is available in the upstream release. [Temurin 11.0.33+10](https://github.com/adoptium/temurin11-binaries/releases/tag/jdk-11.0.33%2B10)
+- **Eclipse Temurin (OpenJDK)** 使用 GPL v2 with Classpath Exception。GitHub Release 2.7.1 內建 Temurin 11.0.33+10，對應原始碼為 `OpenJDK11U-jdk-sources_11.0.33_10.tar.gz`。 The source for the bundled Temurin runtime is available in the upstream release. [Temurin 11.0.33+10](https://github.com/adoptium/temurin11-binaries/releases/tag/jdk-11.0.33%2B10)
 - 本重新打包專案以 GPL v2.0 發布。 This repackaging project is released under GPL v2.0. [LICENSE](LICENSE)
