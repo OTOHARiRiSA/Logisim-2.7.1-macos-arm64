@@ -1,31 +1,49 @@
-# Logisim 2.7.1 (macOS-arm64)
+# Logisim 2.7.1 (macOS arm64)
 
-這是我個人重新打包的 Logisim 2.7.1，主要是為了讓它在搭載了 Apple Silicon 的 Mac 上能正常執行。
-*A personal repack of Logisim 2.7.1, mainly to ensure it runs natively on Macs with Apple Silicon.*
+這是我個人重新打包的 Logisim 2.7.1，主要是為了讓它在搭載了 Apple Silicon 的 Mac 上能正常執行。應用程式內建 Eclipse Temurin 11 執行環境，下載後即可使用，無需另外安裝 Java。
 
-# 這是如何做的？ / How was this built?
-- 使用原版 Logisim 2.7.1 的 `.jar` 與資源文件
-  *Used the original Logisim 2.7.1 `jar` and resource files.*
-- 嵌入了 **Eclipse Temurin 11 (ARM64)** JRE 重新打包。
-  *Repackaged with and embedded **Eclipse Temurin 11 (ARM64)** Java Runtime Environment.*
+A personal repack of Carl Burch’s Logisim 2.7.1 for Apple Silicon Macs. It bundles an Eclipse Temurin 11 runtime, so no separate Java installation is required.
 
-# 注意
+## 下載與安裝 / Download and install
 
-因為没有 Apple 開發者簽名，首次打開時可能會被 macOS GateKeeper 攔截。
- *Because this app is not signed with an Apple Developer certificate, it may be blocked by macOS Gatekeeper on first launch.*
+[下載 Logisim 2.7.1 for Apple Silicon](https://github.com/OTOHARiRiSA/Logisim-2.7.1-macos-arm64/releases/download/2.7.1/Logisim-2.7.1-macos-arm64.zip)
 
-**如何解決 / How to bypass:**
+解壓縮 ZIP，將 `Logisim.app` 拖到「應用程式」資料夾，再雙擊開啟。
 
-打開你的终端輸入 / Open your terminal to paste following command
-```bash
-  sudo xattr -rd com.apple.quarantine /path/to/app
+Unzip the archive, drag `Logisim.app` to Applications, and double-click it.
+
+### 首次開啟 / First launch
+
+此版本使用 ad hoc 簽名，尚未通過 Apple 公證。若 Gatekeeper 攔截，先嘗試開啟一次，再到「系統設定 → 隱私權與安全性」為 Logisim 選擇「仍要打開」。
+
+This release is ad hoc signed and has not been notarized. If Gatekeeper blocks it, try opening it once, then choose **Open Anyway** for Logisim in **System Settings → Privacy & Security**. [Apple Support](https://support.apple.com/en-us/102445)
+
+## 這是如何做的？ / How was this built?
+
+此專案使用原版 Logisim 2.7.1 的 JAR 與資源，搭配 arm64 原生啟動器。建置時使用 Temurin 11 JDK，並以 `jlink` 產生應用程式內的 Java 執行環境。
+
+The build uses the original Logisim 2.7.1 JAR and resources with a native arm64 launcher. It creates the bundled Java runtime with `jlink` from the Temurin 11 JDK.
+
+在 Apple Silicon Mac 上安裝 Xcode Command Line Tools 和 **Eclipse Temurin 11 JDK（macOS aarch64）** 後執行下列指令。
+
+Run these commands on an Apple Silicon Mac with the Xcode Command Line Tools and **Eclipse Temurin 11 JDK (macOS aarch64)** installed. [Temurin macOS installer guide](https://adoptium.net/en-GB/installation/macOS)
+
+```sh
+git clone https://github.com/OTOHARiRiSA/Logisim-2.7.1-macos-arm64.git
+cd Logisim-2.7.1-macos-arm64
+./build.sh
 ```
-  (请把命令里的 "/path/to/app" 换成 Logisim 的實際路径！！！)
-  (Replace "/path/to/app" with actual path to your logisim application!!!）
 
+腳本會透過 macOS 尋找 JDK 11。若使用自行解壓縮的 JDK，或同時安裝了多個版本，可設定 `JAVA_HOME` 指向 Temurin 11 的 `Contents/Home`。
 
-## License
-1. **Logisim 2.7.1**: Developed by Carl Burch, licensed under **GNU GPL v2.0** [Logisim Official Websiste](https://cburch.com/logisim/)
-2. **Eclipse Temurin (OpenJDK)**: Licensed under **GNU GPL v2.0 with Classpath Exception**
+The script looks for JDK 11 through macOS. Set `JAVA_HOME` to Temurin 11's `Contents/Home` to select it explicitly.
 
-This Repack project is also released under the **GPL v2.0** license
+建置結果為 `dist/Logisim.app` 和 `dist/Logisim-2.7.1-macos-arm64.zip`。如需保留先前的建置結果，可以指定另一個輸出目錄，例如 `./build.sh /tmp/logisim-build`。
+
+The build produces `dist/Logisim.app` and `dist/Logisim-2.7.1-macos-arm64.zip`. Pass a new output directory, such as `./build.sh /tmp/logisim-build`, to keep an earlier build.
+
+## 授權 / License
+
+- **Logisim 2.7.1** 由 Carl Burch 開發，原始碼和授權條款收錄於 `vendor/logisim.jar`。 The original JAR includes the Logisim source and GPL terms. [Logisim](https://cburch.com/logisim/)
+- **Eclipse Temurin (OpenJDK)** 使用 GPL v2 with Classpath Exception。GitHub Release 2.7.1 內建 Temurin 11.0.33+10，對應原始碼為 `OpenJDK11U-jdk-sources_11.0.33_10.tar.gz`。 The Temurin source for the published ZIP is available in the upstream release. [Temurin 11.0.33+10](https://github.com/adoptium/temurin11-binaries/releases/tag/jdk-11.0.33%2B10)
+- 本重新打包專案以 GPL v2.0 發布。 This repackaging project is released under GPL v2.0. [LICENSE](LICENSE)
